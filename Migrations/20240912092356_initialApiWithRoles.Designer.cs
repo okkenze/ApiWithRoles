@@ -12,8 +12,8 @@ using WebApiWithRoleAuthentication.Data;
 namespace WebApiWithRoleAuthentication.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240518233103_Init")]
-    partial class Init
+    [Migration("20240912092356_initialApiWithRoles")]
+    partial class initialApiWithRoles
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,20 +50,6 @@ namespace WebApiWithRoleAuthentication.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "effee7e0-5aad-4151-aead-e354fb6e0490",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "fb77147a-f088-448f-a1f3-0af14962363d",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -154,22 +140,6 @@ namespace WebApiWithRoleAuthentication.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "69b36612-938e-45a2-aa7f-b0e3eef8954b",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d9d2f033-1d20-415f-a791-dac20c2fac9f",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAECmzYaEg69cEd8fjhhTSzBUsdx0JppAtQLkxtFseqe6HpIM6sgEM4B3ogBzfQM6Jqg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "b7b90810-4112-4af6-9251-937312419efd",
-                            TwoFactorEnabled = false,
-                            UserName = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -232,13 +202,6 @@ namespace WebApiWithRoleAuthentication.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "69b36612-938e-45a2-aa7f-b0e3eef8954b",
-                            RoleId = "effee7e0-5aad-4151-aead-e354fb6e0490"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -258,31 +221,6 @@ namespace WebApiWithRoleAuthentication.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("WebApiWithRoleAuthentication.Models.Blogs", b =>
-                {
-                    b.Property<int>("BlogId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogId"));
-
-                    b.Property<string>("BlogDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BlogTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BlogsAuthor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BlogId");
-
-                    b.ToTable("Blogs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

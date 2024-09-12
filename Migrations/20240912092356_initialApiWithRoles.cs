@@ -3,12 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace WebApiWithRoleAuthentication.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class initialApiWithRoles : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,21 +48,6 @@ namespace WebApiWithRoleAuthentication.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Blogs",
-                columns: table => new
-                {
-                    BlogId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BlogTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BlogDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BlogsAuthor = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Blogs", x => x.BlogId);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,25 +156,6 @@ namespace WebApiWithRoleAuthentication.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "effee7e0-5aad-4151-aead-e354fb6e0490", null, "Admin", "ADMIN" },
-                    { "fb77147a-f088-448f-a1f3-0af14962363d", null, "User", "USER" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "69b36612-938e-45a2-aa7f-b0e3eef8954b", 0, "d9d2f033-1d20-415f-a791-dac20c2fac9f", "admin@gmail.com", true, false, null, null, null, "AQAAAAIAAYagAAAAECmzYaEg69cEd8fjhhTSzBUsdx0JppAtQLkxtFseqe6HpIM6sgEM4B3ogBzfQM6Jqg==", null, false, "b7b90810-4112-4af6-9251-937312419efd", false, "Admin" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "effee7e0-5aad-4151-aead-e354fb6e0490", "69b36612-938e-45a2-aa7f-b0e3eef8954b" });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -249,9 +213,6 @@ namespace WebApiWithRoleAuthentication.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Blogs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
